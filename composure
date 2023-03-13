@@ -1,0 +1,108 @@
+//car.h
+#pragma once
+ #include <string>
+ using namespace std;
+ 
+class Car 
+{
+protected:
+    string title;         
+    int releaseYear;      
+    double engineVolume;  
+    double price;         
+public:
+ 
+    Car();
+ 
+
+    Car(string title, int releaseYear, double engineVolume, double price);
+ 
+    virtual ~Car();
+
+    void set_title(string title);
+
+    void set_releaseYear(int releaseYear);
+ 
+    void set_engineVolume(double engineVolume);
+ 
+    void set_price(double price);
+    string get_title();
+ 
+    int get_yearOfIssue();
+    double get_engineVolume();
+ 
+    double get_price();
+ 
+    virtual void Print();
+ 
+    virtual void Write(ofstream& out);
+ 
+    virtual void Read(ifstream& in);
+};
+
+
+//car.cpp
+#include "Car.h"
+#include <fstream>
+#include <iostream>
+ 
+using namespace std;
+ 
+Car::Car() :m_title("unknown"), m_releaseYear(0), m_engineVolume(0.0), m_price(0.0) {}
+ 
+
+Car::Car(string title, int releaseYear, double engineVolume, double price) :
+    m_title(title), m_releaseYear(releaseYear), m_engineVolume(engineVolume), m_price(price) {}
+ 
+
+Car::~Car() = default;
+ 
+
+void Car::set_title(string title) { m_title = title; }
+ 
+
+void Car::set_releaseYear(int releaseYear) { m_releaseYear = releaseYear; }
+ 
+
+void Car::set_engineVolume(double engineVolume) { m_engineVolume = engineVolume; }
+ 
+
+void Car::set_price(double price) { m_price = price; }
+ 
+
+string Car::get_title() { return m_title; }
+
+int Car::get_releaseYear() { return m_releaseYear; }
+ 
+
+double Car::get_engineVolume() { return m_engineVolume; }
+ 
+
+double Car::get_price() { return m_price; }
+ 
+
+void Car::Print()
+{
+    cout << "Название автомобиля: " << m_title << endl
+        << "Год выпуска: " << m_releaseYear << endl
+        << "Объем двигателя: " << m_engineVolume << endl
+        << "Цена: " << m_price << endl;
+}
+ 
+
+void Car::Write(ofstream& out)
+{
+    out << m_title << "\n" 
+        << m_releaseYear << "\n"
+        << m_engineVolume << "\n"
+        << m_price << "\n";
+}
+ 
+
+void Car::Read(ifstream& in)
+{
+    in.get(); 
+    in >> m_releaseYear;
+    in >> m_engineVolume;
+    in >> m_price;
+}
